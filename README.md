@@ -1,5 +1,7 @@
 # ynab-importer-for-uae-banks
 
+**This readme is not yet written. Look at design.md for (badly written) usage instructions in the meanwhile.**
+
 A CLI app that can import UAE bank statements into the "You Need A Budget" budgeting app. For the first iteration I only
 want to parse account and credit card statements from these banks and export a file that can be imported into YNAB:
 - Emirates NBD
