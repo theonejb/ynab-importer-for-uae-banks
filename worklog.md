@@ -73,3 +73,4 @@ $ xml2 < Credit_Statements.xls | grep '/Workbook/Worksheet/ss:Table/Row/Cell/Dat
 - Would also like to add an option `--filter after=2022-01-01` to only output transactions that happen after this date.
 - Using https://github.com/BrunoBonacci/lein-binplus for packaging. This generates a bin file I can upload for Unix like systems.
 - Need to use clojure cli package to provide better CLI args support.
+- Updated readme and did a proper release. :)
