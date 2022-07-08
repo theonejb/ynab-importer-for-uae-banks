@@ -1,48 +1,56 @@
 # ynab-importer-for-uae-banks
 
-**This readme is not yet written. Look at design.md for (badly written) usage instructions in the meanwhile.**
-
-A CLI app that can import UAE bank statements into the "You Need A Budget" budgeting app. For the first iteration I only
-want to parse account and credit card statements from these banks and export a file that can be imported into YNAB:
+A CLI app that converts my Excel based banking statements into a CSV that can be imported into the "You Need A Budget" budgeting app. Right now it can convert the following bank statement types:
 - Emirates NBD
+  - Current account statement
+  - Credit card statement
+
+Look at the [design document](design.md) for some details on why I needed this.
 
 ## Installation
 
-Download from http://example.com/FIXME.
+The app is distributed as a single binary. You can find the latest version on the releases page. You should put it somewhere that's on your `$PATH`.
+
+I've used the [lein binplus](https://github.com/BrunoBonacci/lein-binplus) plugin to generate an executable JAR file. As I understand, the executable part comes from a Bash shell script that is concatenated to the beginning of the JAR archive. Which means that the binary should run on most recent Linux or MacOS systems.
+
+If you need to run on a different OS, you can download the Clojure code from this repo and compile it with [leiningen](http://leiningen.org).
 
 ## Usage
 
-FIXME: explanation
+    $ ynab-importer-for-uae-banks "Statement Type" "Input File Name" "Output File Name"
 
-    $ java -jar ynab-importer-for-uae-banks-0.1.0-standalone.jar [args]
+Statement type is one of the following:
+- `ENBD-Debit`
+- `ENBD-Credit`
 
-## Options
+You also need to provide a config file before you can use the app. This file should live at `~/.config/ynab-importer-for-uae-banks.edn` and have this format:
 
-FIXME: listing of options this app accepts.
+    {
+        :enbd-credit {
+            :validation-lines ["JIBRAN", "40000000001234"]
+        }
+        
+        :enbd-debit {
+            :validation-lines ["LINE 1" "LINE 2" "LINE N"]
+        }
+    }
+
+The `:validation-lines` are consecutive cell values that must be present in the input file for each of the statement types. We use these to gain confidence that we are processing the right input file for the statement type you select.
+
+Look at [the configuration section in the design document](design.md#config-file) for more details.
 
 ## Examples
 
-...
+    ynab-importer-for-uae-banks ENBD-Debit '/Users/asadjb/Downloads/Bank Imports/June 19/Credit_Statements.xml' out_debit.csv
+    ynab-importer-for-uae-banks ENBD-Credit '/Users/asadjb/Downloads/Bank Imports/June 19/Credit_Statements.xml' out_credit.csv
 
-### Bugs
+## Contributing and future development plans
+I've kept a log of my thoughts and actions in the [worklog](worklog.md). That file also lists some ideas I have for future development. I have one anti-goal for this app:
+1. Don't overcomplicate it. I don't want this to be a general purpose app to transform statement from any bank to YNAB importable CSVs. This app is limited to supporting UAE bank statements only. This anti-goal should help in keeping this simple and easy to develop on.
 
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
+If you would like to contribute new features, I'd suggest opening a Github issue and discussing it first. You're welcome to just start writing code and opening a pull request, but I can't guarantee that a PR will be accepted if it doesn't align with the goals and anti-goals.
 
 ## License
+See [license](LICENSE).
 
-Copyright © 2022 FIXME
-
-This program and the accompanying materials are made available under the
-terms of the Eclipse Public License 2.0 which is available at
-http://www.eclipse.org/legal/epl-2.0.
-
-This Source Code may also be made available under the following Secondary
-Licenses when the conditions for such availability set forth in the Eclipse
-Public License, v. 2.0 are satisfied: GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or (at your
-option) any later version, with the GNU Classpath Exception which is available
-at https://www.gnu.org/software/classpath/license.html.
+Copyright © 2022 Asad Jibran Ahmed

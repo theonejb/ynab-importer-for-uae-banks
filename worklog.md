@@ -70,3 +70,6 @@ $ xml2 < Credit_Statements.xls | grep '/Workbook/Worksheet/ss:Table/Row/Cell/Dat
   - Eventually I'd like the script to store any new replacements I make into a DB, and to run the whole process again if I add a new regex.
 
 - For now, the immediate next step is to work on releasing this. A GitHub repo with a nicely formatted readme. Then share it widely.
+- Would also like to add an option `--filter after=2022-01-01` to only output transactions that happen after this date.
+- Using https://github.com/BrunoBonacci/lein-binplus for packaging. This generates a bin file I can upload for Unix like systems.
+- Need to use clojure cli package to provide better CLI args support.

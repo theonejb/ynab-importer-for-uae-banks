@@ -9,6 +9,13 @@
 (load "core/cleaner")
 (load "core/writer")
 
+; To make clj-kondo happy about things declared in the above files.
+(declare extract-cell-data-lines)
+(declare validate-cell-data-lines)
+(declare remove-non-transaction-data)
+(declare transaction-data-lines->maps)
+(declare write-cleaned-data)
+
 (defn get-config-path []
   (str (System/getProperty "user.home") \/ ".config/ynab-importer-for-uae-banks.edn"))
 
