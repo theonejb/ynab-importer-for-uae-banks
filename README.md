@@ -9,7 +9,9 @@ Look at the [design document](design.md) for some details on why I needed this.
 
 ## Installation
 
-The app is distributed as a single binary. You can find the latest version on the releases page. You should put it somewhere that's on your `$PATH`.
+The app is distributed as a single binary. You can find the latest version on the releases page. You should put it somewhere that's on your `$PATH` and mark it as executable via:
+
+    chmod u+x ynab-importer-for-uae-banks
 
 I've used the [lein binplus](https://github.com/BrunoBonacci/lein-binplus) plugin to generate an executable JAR file. As I understand, the executable part comes from a Bash shell script that is concatenated to the beginning of the JAR archive. Which means that the binary should run on most recent Linux or MacOS systems.
 
