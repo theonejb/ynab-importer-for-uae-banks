@@ -17,7 +17,9 @@ If you need to run on a different OS, you can download the Clojure code from thi
 
 ## Usage
 
-    $ ynab-importer-for-uae-banks "Statement Type" "Input File Name" "Output File Name"
+```shell
+$ ynab-importer-for-uae-banks "Statement Type" "Input File Name" "Output File Name"
+```
 
 Statement type is one of the following:
 - `ENBD-Debit`
@@ -25,15 +27,17 @@ Statement type is one of the following:
 
 You also need to provide a config file before you can use the app. This file should live at `~/.config/ynab-importer-for-uae-banks.edn` and have this format:
 
-    {
-        :enbd-credit {
-            :validation-lines ["JIBRAN", "40000000001234"]
-        }
-        
-        :enbd-debit {
-            :validation-lines ["LINE 1" "LINE 2" "LINE N"]
-        }
-    }
+```clojure
+{
+ :enbd-credit {
+               :validation-lines ["JIBRAN", "40000000001234"]
+               }
+
+ :enbd-debit  {
+               :validation-lines ["LINE 1" "LINE 2" "LINE N"]
+               }
+}
+```
 
 The `:validation-lines` are consecutive cell values that must be present in the input file for each of the statement types. We use these to gain confidence that we are processing the right input file for the statement type you select.
 
