@@ -9,7 +9,7 @@ Look at the [design document](design.md) for some details on why I needed this.
 
 ## Installation
 
-The app is distributed as a single binary. You can find the latest version on the releases page. You should put it somewhere that's on your `$PATH` and mark it as executable via:
+The app is distributed as a single binary. You can find the latest version on the [releases page](https://github.com/theonejb/ynab-importer-for-uae-banks/releases). You should put it somewhere that's on your `$PATH` and mark it as executable via:
 
     chmod u+x ynab-importer-for-uae-banks
 
