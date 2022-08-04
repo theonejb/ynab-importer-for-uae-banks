@@ -27,7 +27,7 @@
 (defn is-valid-statement-type? [user-input]
   (not (nil? (statement-type->config-key user-input))))
 
-(defn does-file-exist? [path] (.exists (io/file path)))
+(defn does-file-exist? [path] (if path (.exists (io/file path)) false))
 
 (defn is-xml2-installed? [] (= 0 (:exit (shell/sh "which" "xml2"))))
 
@@ -45,6 +45,9 @@
 
     (not (does-file-exist? input-path))
     (exit-with-error "Input file does not exist. Provided path: '" input-path "'.")
+
+    (nil? output-path)
+    (exit-with-error "Output file path not provided.")
 
     (does-file-exist? output-path)
     (exit-with-error "Output file already exists. Provided path: '" output-path "'.")
